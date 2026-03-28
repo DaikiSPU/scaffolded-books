@@ -24,18 +24,26 @@ app.get("/", (req, res) => {
  */
 app.post("/submit", (req, res) => {
   const name = (req.body.name || "").trim();
+  const age = (req.body.age || "").trim();
 
   const safeName = name
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;");
 
+  const safeAge = age
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+
+
   res.send(`<!doctype html>
 <html lang="en">
   <head><meta charset="UTF-8"><title>Submitted</title></head>
   <body>
     <h1>Thanks!</h1>
-    <p>You submitted: <strong>${safeName || "(empty)"}</strong></p>
+    <p>You submitted name: <strong>${safeName || "(empty)"}</strong></p>
+    <p>You submitted age: <strong>${safeAge || "(empty)"}</strong></p>
     <p><a href="/">Back</a></p>
   </body>
 </html>`);
